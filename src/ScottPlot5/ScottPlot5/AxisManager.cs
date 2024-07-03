@@ -151,10 +151,33 @@ public class AxisManager
         Plot.Axes.Grids.ForEach(x => x.Replace(dateAxis));
     }
 
-    /// <summary>
-    /// Remove all bottom axes, create a DateTime bottom axis, add it to the plot, and return it.
-    /// </summary>
-    public DateTimeXAxis DateTimeTicksBottom()
+
+	/// <summary>
+	/// Remove all bottom axes, create a DateTime bottom axis, add it to the plot, and return it.
+	/// </summary>
+	public LogDecadeXAxis LogDecadeTicksBottom()
+	{
+		// remove all bottom axes
+		Plot.Axes.Remove(Edge.Bottom);
+
+		// create a new bottom axis and add it
+		LogDecadeXAxis logDecadeAxis = new();
+		//logDecadeAxis.Color(ForegroundColor);
+		Plot.Axes.XAxes.Add(logDecadeAxis);
+
+
+		Plot.Axes.XAxes.Add(logDecadeAxis);
+		Plot.Axes.Grids.ForEach(x => x.Replace(logDecadeAxis));
+
+		// autoscale the new axis to fit data already on the plot
+		AutoScale();
+		return logDecadeAxis;
+	}
+
+	/// <summary>
+	/// Remove all bottom axes, create a DateTime bottom axis, add it to the plot, and return it.
+	/// </summary>
+	public DateTimeXAxis DateTimeTicksBottom()
     {
         Plot.Axes.Remove(Edge.Bottom);
         DateTimeXAxis dateAxis = new();
